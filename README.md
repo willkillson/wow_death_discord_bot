@@ -10,11 +10,16 @@
   To get the token click on "Bot" in the left hand side, and click the copy token.
 5. Add WEBHOOKID and WEBHOOKTOKEN to the `.env` file.
   Follow step 1 to create the discord webhook.
-  https://www.digitalocean.com/community/tutorials/how-to-use-discord-webhooks-to-get-notifications-for-your-website-status-on-ubuntu-18-04
-  Then use that webhook URL to fill out the .env file.
+  https://www.digitalocean.com/community/tutorials/how-to-use-discord-webhooks-to-get-notifications-for-your-website-status-on-ubuntu-18-04 
+  
+  Then use that webhook URL to fill out the .env file. 
+  
   Example,
-  https://discord.com/api/webhooks/12345678910/T0kEn0fw3Bh00K
-  12345678910 is the WEBHOOKID
-  T0kEn0fw3Bh00K is the WEBHOOKTOKEN
+  https://discord.com/api/webhooks/12345678910/T0kEn0fw3Bh00K 
+  
+  12345678910 is the WEBHOOKID 
+  
+  T0kEn0fw3Bh00K is the WEBHOOKTOKEN 
+  
 6. Run `node index.js`
 7. Run the tests in ./postman
