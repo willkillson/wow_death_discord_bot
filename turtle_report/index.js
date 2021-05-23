@@ -61,8 +61,8 @@ app.post('/api/msg', async (req, res) => {
 
     let map_id = req.body.map_id;
     let player_name = req.body.player_name;
-    let x_cordinate = parseFloat(req.body.local_pos_x);
-    let y_cordinate = parseFloat(req.body.local_pos_y);
+    let x_cordinate = Math.random()*100;
+    let y_cordinate = Math.random()*100;
     x_cordinate = x_cordinate/100;
     y_cordinate = y_cordinate/100;
 
@@ -71,7 +71,9 @@ app.post('/api/msg', async (req, res) => {
       let image_background = await Jimp.read('./data/background/background.jpg');
       let image_map_frame = await Jimp.read('./data/background/border.png');
       let image_mark = await Jimp.read('./data/icons/X_icon.png');
-      let image_map = await Jimp.read(`./data/maps/${map_id}.jpg`);
+
+      let map_path = `./data/maps/${map_id}.jpg`;
+      let image_map = await Jimp.read(map_path);
 
       // Resizes the images.
       image_mark.resize(CURSOR_SIZE,CURSOR_SIZE);
@@ -79,8 +81,13 @@ app.post('/api/msg', async (req, res) => {
 
       // Place the death marker on the map.
       image_map.composite(image_mark,MAP_IMAGE_WIDTH*x_cordinate-(CURSOR_SIZE/2), MAP_IMAGE_HEIGHT*y_cordinate-(CURSOR_SIZE/2));
+
+      //  Save the map for "persistence"
+      await image_map.writeAsync(map_path);
+
       //  Place the map into the map frame.
       image_map_frame.composite(image_map,26,29);
+
       //  Place the mapframe+map into the background.
       image_background.composite(image_map_frame,30, 50);
       
