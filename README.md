@@ -38,22 +38,34 @@ This is a quick demo of a discord bot that announces deaths for private wow serv
 See the postman scripts for details on the json payload. CURL could be used to send out a request to node webserver.
 Replace localhost with the ip address, and make sure the ports are forwarded. 
 
-C code
-```c
-CURL *curl;
-CURLcode res;
-curl = curl_easy_init();
-if(curl) {
-  curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+C++ code
+```c++
+  CURLcode ret;
+  CURL *hnd;
+  struct curl_slist *slist1;
+  std::string jsonstr =  "{\r\n    \"player_name\":\"ikillalot\",\r\n
+      \"map_id\":\"215\",\r\n    
+      \"local_pos_x\":\"63.2\",\r\n   
+      \"local_pos_y\":\"82.3\",\r\n    
+      \"token\":\"SECRESSECSEFCSERSERSERSER\"\r\n}";
+
+  slist1 = NULL;
+  slist1 = curl_slist_append(slist1, "Content-Type: application/json");
+
+  hnd = curl_easy_init();
   curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:3000/api/msg");
-  curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-  curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
-  struct curl_slist *headers = NULL;
-  headers = curl_slist_append(headers, "Content-Type: application/json");
-  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-  const char *data = "{\r\n    \"player_name\":\"ikillalot\",\r\n    \"map_id\":\"215\",\r\n    \"local_pos_x\":\"63.2\",\r\n    \"local_pos_y\":\"82.3\",\r\n    \"token\":\"SECRESSECSEFCSERSERSERSER\"\r\n}";
-  curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
-  res = curl_easy_perform(curl);
-}
-curl_easy_cleanup(curl);
+  curl_easy_setopt(hnd, CURLOPT_NOPROGRESS, 1L);
+  curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, jsonstr.c_str());
+  curl_easy_setopt(hnd, CURLOPT_USERAGENT, "curl/7.38.0");
+  curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, slist1);
+  curl_easy_setopt(hnd, CURLOPT_MAXREDIRS, 50L);
+  curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+  curl_easy_setopt(hnd, CURLOPT_TCP_KEEPALIVE, 1L);
+
+  ret = curl_easy_perform(hnd);
+
+  curl_easy_cleanup(hnd);
+  hnd = NULL;
+  curl_slist_free_all(slist1);
+  slist1 = NULL;
 ```
