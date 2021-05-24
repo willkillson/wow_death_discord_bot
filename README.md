@@ -2,7 +2,7 @@
 
 This is a quick demo of a discord bot that announces deaths for private wow servers. The use case for this bot would be to allow a community to be able to see deaths in hardcore modes. If you would like a demo of this software, or need help integrating please reach out to me in this discord channel https://discord.gg/r2b55UEFxh
     
-![Uploading image.png…]()
+![image](https://user-images.githubusercontent.com/26101774/119417079-e86ec300-bca9-11eb-96a4-4ea955c33108.png)
 
 ## Installation Steps
 
