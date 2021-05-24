@@ -23,5 +23,6 @@
   
 6. Run `node index.js`
 7. Import postman scripts into postman https://www.postman.com/
-8. Modifiy the tests to the new Token from step 4.
+8. Modifiy the tests to include the new Token from step 4.
+    ![image](https://user-images.githubusercontent.com/26101774/119303713-11944280-bc1b-11eb-9d19-cf797731dee5.png)
 9. Run the tests
