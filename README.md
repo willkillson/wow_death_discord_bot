@@ -36,7 +36,8 @@ This is a quick demo of a discord bot that announces deaths for private wow serv
 ## Integrating
 
 See the postman scripts for details on the json payload. CURL could be used to send out a request to node webserver.
-Replace localhost with the ip address, and make sure the ports are forwarded.
+Replace localhost with the ip address, and make sure the ports are forwarded. 
+
 C code
 ```c
 CURL *curl;
