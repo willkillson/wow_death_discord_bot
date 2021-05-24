@@ -22,4 +22,6 @@
     T0kEn0fw3Bh00K is the WEBHOOKTOKEN 
   
 6. Run `node index.js`
-7. Run the tests in ./postman
+7. Import postman scripts into postman https://www.postman.com/
+8. Modifiy the tests to the new Token from step 4.
+9. Run the tests
