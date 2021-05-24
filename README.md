@@ -32,3 +32,26 @@ This is a quick demo of a discord bot that announces deaths for private wow serv
 8. Modifiy the tests to include the new Token from step 4.
     ![image](https://user-images.githubusercontent.com/26101774/119303713-11944280-bc1b-11eb-9d19-cf797731dee5.png)
 9. Run the tests
+
+## Integrating
+
+See the postman scripts for details on the json payload. CURL could be used to send out a request to node webserver.
+Replace localhost with the ip address, and make sure the ports are forwarded.
+```c
+CURL *curl;
+CURLcode res;
+curl = curl_easy_init();
+if(curl) {
+  curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+  curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:3000/api/msg");
+  curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+  curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
+  struct curl_slist *headers = NULL;
+  headers = curl_slist_append(headers, "Content-Type: application/json");
+  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+  const char *data = "{\r\n    \"player_name\":\"ikillalot\",\r\n    \"map_id\":\"215\",\r\n    \"local_pos_x\":\"63.2\",\r\n    \"local_pos_y\":\"82.3\",\r\n    \"token\":\"SECRESSECSEFCSERSERSERSER\"\r\n}";
+  curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
+  res = curl_easy_perform(curl);
+}
+curl_easy_cleanup(curl);
+```
